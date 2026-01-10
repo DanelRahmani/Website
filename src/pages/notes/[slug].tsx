@@ -61,32 +61,49 @@ export default function Note({
 }
 
 export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (context) => {
-  const slug = context.params?.slug;
-  const allNotes = await notesApi.getNotes();
-  const note = allNotes.find((note) => note.slug === slug);
+  try {
+    const slug = context.params?.slug;
+    const allNotes = await notesApi.getNotes();
+    const note = allNotes.find((note) => note.slug === slug);
 
-  if (!note) {
+    if (!note) {
+      return {
+        notFound: true,
+      };
+    }
+
+    const noteContent = await notesApi.getNote(note.id);
+
     return {
-      notFound: true,
+      props: {
+        note,
+        noteContent,
+      },
+      revalidate: 10,
     };
+  } catch (err: any) {
+    console.error('Error in getStaticProps for /notes/[slug]:', err);
+    // If app is misconfigured (Notion disabled), surface a clear message
+    if (err?.message?.includes('Notion not configured')) {
+      throw err;
+    }
+    throw new Error(`Failed to collect page data for /notes/[slug]: ${err?.message ?? String(err)}`);
   }
-
-  const noteContent = await notesApi.getNote(note.id);
-
-  return {
-    props: {
-      note,
-      noteContent,
-    },
-    revalidate: 10,
-  };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await notesApi.getNotes();
+  try {
+    const posts = await notesApi.getNotes();
 
-  return {
-    paths: posts.map((post) => ({ params: { slug: post.slug } })),
-    fallback: 'blocking',
-  };
+    return {
+      paths: posts.map((post) => ({ params: { slug: post.slug } })),
+      fallback: 'blocking',
+    };
+  } catch (err: any) {
+    console.error('Error in getStaticPaths for /notes:', err);
+    if (err?.message?.includes('Notion not configured')) {
+      throw err;
+    }
+    throw new Error(`Failed to get static paths for /notes: ${err?.message ?? String(err)}`);
+  }
 };
