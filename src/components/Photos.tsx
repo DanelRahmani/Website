@@ -5,7 +5,6 @@ import { useState } from 'react';
 
 import { travelImages } from '../images/travel';
 
-const possibleRotations = [1.3, -1.3, 1.3, -1.3, 1.3, -1.3];
 
 const Photo = ({
   img,
@@ -23,7 +22,7 @@ const Photo = ({
   return (
     <motion.div
       key={img.src}
-      initial={{ scale: 1, rotate: possibleRotations[idx % possibleRotations.length], opacity: 0 }}
+      initial={{ scale: 1, opacity: 0 }}
       whileHover={{ scale: 1.1, rotate: 0, transition: { duration: 0.2 } }}
       whileInView={{ opacity: 1, transition: { delay: idx / 100 } }}
       viewport={{ once: true }}

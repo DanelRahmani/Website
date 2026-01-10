@@ -29,8 +29,8 @@ module.exports = {
         '9xl': ['8rem', { lineHeight: '1' }],
       },
       colors: {
-        primary: '#FB2576',
-        'primary-light': '#fd92ba',
+        primary: '#bc0000dd',
+        'primary-light': '#e92c2c',
         'primary-dark': '#8d0237',
       },
       typography: (theme) => ({

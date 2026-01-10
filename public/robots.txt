@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://jarocki.me
+Host: https://danelrahmani.com
 
 # Sitemaps
-Sitemap: https://jarocki.me/sitemap.xml
+Sitemap: https://danelrahmani.com/sitemap.xml

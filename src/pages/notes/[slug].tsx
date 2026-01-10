@@ -2,7 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { ArticleJsonLd, NextSeo } from 'next-seo';
 import Prism from 'prismjs';
 import { useEffect } from 'react';
-
+import Share, { openShare } from '../../components/Share';
 import { XIcon } from '../../components/icons/XIcon';
 import { NoteLayout } from '../../components/notes/NoteLayout';
 import { NotionBlockRenderer } from '../../components/notion/NotionBlockRenderer';
@@ -40,7 +40,7 @@ export default function Note({
         images={[openGraphImageUrl]}
         title={title}
         datePublished={createdAt}
-        authorName="Bartosz Jarocki"
+        authorName="Danel Rahmani"
         description={description}
       />
       <NoteLayout
@@ -53,16 +53,7 @@ export default function Note({
           ))}
 
           <hr />
-
-          <a
-            className="group block text-xl font-semibold md:text-3xl no-underline"
-            href={`http://x.com/share?text=${title}&url=${url}`}
-          >
-            <h4 className="max-w-lg flex cursor-pointer flex-col duration-200 ease-in-out group-hover:text-primary group-hover:fill-primary fill-white text-wrap">
-              <XIcon className="my-6 h-10 w-10 transform transition-transform group-hover:-rotate-12 text-black dark:text-white group-hover:text-primary" />
-              Click here to share this article with your friends on X if you liked it.
-            </h4>
-          </a>
+          <Share title={title} url={url} image={openGraphImageUrl} className="mt-8" />
         </div>
       </NoteLayout>
     </>
