@@ -37,7 +37,7 @@ export function openShare(platform: Platform, title: string, url: string, text?:
     /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent || '');
 
   // Use native share on mobile where available
-  if (typeof navigator !== 'undefined' && navigator.share && isMobile) {
+  if (typeof navigator !== 'undefined' && typeof navigator.share === 'function' && isMobile) {
     navigator.share(shareData).catch(() => {
       // fallback: open in new tab if possible, final fallback to same tab
       const shareUrl = getShareUrl(platform, title, url, text, image);
@@ -132,7 +132,7 @@ export default function Share({ title, url, image, className = '' }: { title: st
         }
 
         // If we are on mobile and the Web Share API exists, use a button to invoke it
-        if (isMobileClient && typeof navigator !== 'undefined' && navigator.share) {
+        if (isMobileClient && typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
           return (
             <button
               key={p}
