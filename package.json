@@ -58,9 +58,9 @@
   "license": "MIT",
   "packageManager": "yarn@4.5.0"
   },
-  "scripts": {
-    "build": "next build && open-next build",
-    "deploy": "yarn build && npx wrangler deploy"
-  }
+"scripts": {
+  "build": "yarn next build && yarn open-next build",
+  "deploy": "yarn build && yarn wrangler deploy"
 }
+
 
