@@ -57,9 +57,5 @@
   },
   "license": "MIT",
   "packageManager": "yarn@4.5.0"
-  },
-"scripts": {
-  "build": "npx @cloudflare/next-on-pages",
-  "deploy": "yarn build && npx wrangler deploy .vercel/output/functions"
 }
 
