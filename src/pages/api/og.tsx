@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { ImageResponse } from '@vercel/og';
 import { NextRequest } from 'next/server';
-import { buildOpenGraphUrl } from '../lib/og';
+import { buildOpenGraphUrl } from '../../lib/og';
 
 export const config = {
   runtime: 'experimental-edge',

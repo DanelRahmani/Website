@@ -10,7 +10,6 @@ import { Section } from '../components/Section';
 import { SocialLink } from '../components/SocialLink';
 import {
   AboutExtended,
-  Blogs,
   Books,
   SocialMedia,
 } from '../data/lifeApi';
