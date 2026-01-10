@@ -1,0 +1,7 @@
+# wrangler.toml
+name = "my-website"                    # Change this to your project name
+type = "javascript"                     # Use 'javascript' for Next.js build output
+compatibility_date = "2026-01-11"      # Today's date (YYYY-MM-DD)
+
+# Output directory created by @cloudflare/next-on-pages
+main = ".vercel/output/functions/index.js"
