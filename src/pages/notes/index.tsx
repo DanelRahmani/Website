@@ -52,13 +52,27 @@ export default function Notes({ notes, tags }: Props) {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const notes = await notesApi.getNotes('desc');
+  try {
+    const notes = await notesApi.getNotes('desc');
 
-  return {
-    props: {
-      notes,
-      tags: Array.from(new Set(notes.map((post) => post.tags).flat())),
-    },
-    revalidate: 10,
-  };
+    return {
+      props: {
+        notes,
+        tags: Array.from(new Set(notes.map((post) => post.tags).flat())),
+      },
+      revalidate: 10,
+    };
+  } catch (err: any) {
+    console.error('Error in getStaticProps for /notes:', err);
+    if (err?.message?.includes('Notion not configured')) {
+      return {
+        props: {
+          notes: [],
+          tags: [],
+        },
+        revalidate: 10,
+      };
+    }
+    throw new Error(`Failed to get notes for /notes: ${err?.message ?? String(err)}`);
+  }
 };

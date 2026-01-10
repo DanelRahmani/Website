@@ -43,31 +43,50 @@ export default function Tag({ tag, relatedNotes }: Props) {
 }
 
 export const getStaticProps: GetStaticProps<Props, { tag: string }> = async (context) => {
-  const tag = context.params?.tag;
-  if (!tag) {
+  try {
+    const tag = context.params?.tag;
+    if (!tag) {
+      return {
+        notFound: true,
+      };
+    }
+
+    const relatedNotes = await notesApi.getNotesByTag(tag);
+
     return {
-      notFound: true,
+      props: {
+        relatedNotes,
+        tag,
+      },
+      revalidate: 10,
     };
+  } catch (err: any) {
+    console.error('Error in getStaticProps for /tags/[tag]:', err);
+    if (err?.message?.includes('Notion not configured')) {
+      return { notFound: true };
+    }
+    throw new Error(`Failed to collect page data for /tags/[tag]: ${err?.message ?? String(err)}`);
   }
-
-  const relatedNotes = await notesApi.getNotesByTag(tag);
-
-  return {
-    props: {
-      relatedNotes,
-      tag,
-    },
-    revalidate: 10,
-  };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const tags = await notesApi.getAllTags();
+  try {
+    const tags = await notesApi.getAllTags();
 
-  return {
-    paths: tags.map((tag) => ({
-      params: { tag },
-    })),
-    fallback: 'blocking',
-  };
+    return {
+      paths: tags.map((tag) => ({
+        params: { tag },
+      })),
+      fallback: 'blocking',
+    };
+  } catch (err: any) {
+    console.error('Error in getStaticPaths for /tags:', err);
+    if (err?.message?.includes('Notion not configured')) {
+      return {
+        paths: [],
+        fallback: false,
+      };
+    }
+    throw new Error(`Failed to get static paths for /tags: ${err?.message ?? String(err)}`);
+  }
 };
