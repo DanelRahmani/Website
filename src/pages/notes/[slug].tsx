@@ -83,9 +83,9 @@ export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (co
     };
   } catch (err: any) {
     console.error('Error in getStaticProps for /notes/[slug]:', err);
-    // If app is misconfigured (Notion disabled), surface a clear message
+    // If Notion is not configured, return notFound so build can continue without notes
     if (err?.message?.includes('Notion not configured')) {
-      throw err;
+      return { notFound: true };
     }
     throw new Error(`Failed to collect page data for /notes/[slug]: ${err?.message ?? String(err)}`);
   }
@@ -101,8 +101,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
     };
   } catch (err: any) {
     console.error('Error in getStaticPaths for /notes:', err);
+    // If Notion is not configured, return no paths so the build can continue
     if (err?.message?.includes('Notion not configured')) {
-      throw err;
+      return {
+        paths: [],
+        fallback: false,
+      };
     }
     throw new Error(`Failed to get static paths for /notes: ${err?.message ?? String(err)}`);
   }
