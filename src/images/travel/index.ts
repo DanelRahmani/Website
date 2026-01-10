@@ -1,115 +1,52 @@
-import antelope from './antelope.jpg';
-import bura from './bura.jpg';
-import image10 from './canaries.jpeg';
-import image11 from './crete.jpeg';
-import croatia2 from './croatia2.jpg';
-import croatia3 from './croatia3.jpg';
-import image3 from './croatia.jpeg';
-import croatia from './croatia.jpg';
-import image12 from './czechia.jpeg';
-import image5 from './france.jpeg';
-import image7 from './germany.jpeg';
-import grandcanyon from './grandcanyon.jpg';
-import griffith from './griffith.jpg';
-import grindelwald from './grindelwald.jpg';
-import guns from './guns.jpeg';
-import image6 from './italy.jpeg';
-import jungfraujoch2 from './jungfraujoch2.jpg';
-import lasvegas2 from './lasvegas2.jpeg';
-import lasvegas from './lasvegas.jpg';
-import lauterbrunnen from './lauterbrunnen.jpg';
-import lucerne from './lucerne.jpg';
-import matterhorn2 from './matterhorn2.jpg';
-import matterhorn from './matterhorn.jpg';
-import image13 from './mexico.jpeg';
-import image14 from './monaco.jpeg';
-import image4 from './netherlands.jpeg';
-import paros from './paros.jpg';
-import poland2 from './poland2.jpg';
-import poland from './poland.jpg';
-import sedona from './sedona.jpg';
-import image9 from './spain.jpeg';
-import image2 from './switzerland.jpeg';
-import image8 from './uk.jpeg';
-import image1 from './usa.jpeg';
-import zabkowice from './zabkowice.jpg';
-import zurich from './zurich.jpg';
+// src/images/selected/index.ts
+import akihabara1 from './Akihabara1.jpg';
+import akihabara2 from './Akihabara2.jpg';
+import akihabara3 from './Akihabara3.jpg';
+import ginza1 from './Ginza1.jpg';
+import ginza2 from './Ginza2.jpg';
+import groningen1 from './Groningen1.jpg';
+import ikebukuro1 from './Ikebukuro1.jpg';
+import inari1 from './Inari1.jpg';
+import metbuilding1 from './MetBuilding1.jpg';
+import metbuilding2 from './MetBuilding2.jpg';
+import metbuilding3 from './MetBuilding3.jpg';
+import osakacastle1 from './OsakaCastle1.jpg';
+import osakacastle2 from './OsakaCastle2.jpg';
+import randomcat1 from './RandomCat1.jpg';
+import randomcat2 from './RandomCat2.jpg';
+import skytree1 from './SkyTree1.jpg';
+import skytree2 from './SkyTree2.jpg';
+import skytree3 from './SkyTree3.jpg';
+import skytree4 from './SkyTree4.jpg';
+import toji1 from './Toji1.jpg';
+import toji2 from './Toji2.jpg';
+import tokyoMisc1 from './TokyoMisc1.jpg';
+import tokyoMisc2 from './TokyoMisc2.jpg';
+import uenoPark from './UenoPark.jpg';
 
 export const travelImages = [
-  { img: image1, title: 'Horseshoe Bend, USA', alt: 'Picture taken in Horseshoe, USA' },
-  { img: antelope, title: 'Antelope Canyon, USA', alt: 'Picture taken in Antelope Canyon, USA' },
-  { img: grandcanyon, title: 'Grand Canyon, USA', alt: 'Picture taken in Grand Canyon, USA' },
-  { img: sedona, title: 'Sedona, USA', alt: 'Picture taken in Sedona, USA' },
-  { img: lasvegas, title: 'Las Vegas, USA', alt: 'Picture taken in Las Vegas, USA' },
-  { img: lasvegas2, title: 'Las Vegas, USA', alt: 'Picture taken in Las Vegas, USA' },
-  {
-    img: griffith,
-    title: 'Griffith Observatory, USA',
-    alt: 'Picture taken in Griffith Observatory, USA',
-  },
-  { img: poland, title: 'Wrocław, Poland', alt: 'Picture taken in Wrocław, Poland' },
-  { img: poland2, title: 'Ustronie, Poland', alt: 'Picture taken in Ustronie, Poland' },
-  { img: zabkowice, title: 'Zabkowice, Poland', alt: 'Picture taken in Zabkowice, Poland' },
-  {
-    img: guns,
-    title: "Guns n' Roses Concert, Warsaw",
-    alt: "Picture taken Guns n' Roses Concert, Warsaw",
-  },
-  { img: bura, title: 'Bura, Wrocław, Poland', alt: 'Picture of my cat, Bura' },
-  {
-    img: croatia,
-    title: 'Krka-Waterfalls, Croatia',
-    alt: 'Picture taken in Krka-Waterfalls, Croatia',
-  },
-  {
-    img: croatia2,
-    title: 'Krka-Waterfalls, Croatia',
-    alt: 'Picture taken in Krka-Waterfalls, Croatia',
-  },
-  { img: image3, title: 'Dubrovnik, Croatia', alt: 'Picture taken in Dubrovnik, Croatia' },
-  {
-    img: croatia3,
-    title: 'Sadurad Island, Croatia',
-    alt: 'Picture taken in Sadurad Island, Croatia',
-  },
-  { img: paros, title: 'Paros, Greece', alt: 'Picture taken in Paros, Greece' },
-  {
-    img: image2,
-    title: 'Jungfraujoch, Switzerland',
-    alt: 'Picture taken on Jungraujoch, Switzerland',
-  },
-  {
-    img: jungfraujoch2,
-    title: 'Jungfraujoch, Switzerland',
-    alt: 'Picture taken on Jungraujoch, Switzerland',
-  },
-  { img: zurich, title: 'Zurich, Switzerland', alt: 'Picture taken in Zurich, Switzerland' },
-  { img: lucerne, title: 'Lucerne, Switzerland', alt: 'Picture taken in Lucerne, Switzerland' },
-  {
-    img: lauterbrunnen,
-    title: 'Lauterbrunnen, Switzerland',
-    alt: 'Picture taken in Lauterbrunnen, Switzerland',
-  },
-  { img: matterhorn, title: 'Zermatt, Switzerland', alt: 'Picture taken in Zermatt, Switzerland' },
-  { img: matterhorn2, title: 'Zermatt, Switzerland', alt: 'Picture taken in Zermatt, Switzerland' },
-  {
-    img: grindelwald,
-    title: 'Grindelwald, Switzerland',
-    alt: 'Picture taken in Grindelwald, Switzerland',
-  },
-  { img: image4, title: 'Amsterdam, Netherlands', alt: 'Picture taken in Amsterdam, Netherlands' },
-  { img: image5, title: 'Grasse, France', alt: 'Picture taken in Grasse, France' },
-  { img: image6, title: 'Portofino, Italy', alt: 'Picture taken in Rome, Italy' },
-  { img: image7, title: 'Berlin, Germany', alt: 'Picture taken in Berlin, Germany' },
-  { img: image8, title: 'London, UK', alt: 'Picture taken in London, UK' },
-  { img: image9, title: 'Barcelona, Spain', alt: 'Picture taken in Barcelona, Spain' },
-  {
-    img: image10,
-    title: 'Fuerteventura, Canary Islands',
-    alt: 'Picture taken in Fuerteventura, Canary Islands',
-  },
-  { img: image11, title: 'Crete, Greece', alt: 'Picture taken in Crete, Greece' },
-  { img: image12, title: 'Prague, Czechia', alt: 'Picture taken in Prague, Czechia' },
-  { img: image13, title: 'Merida, Mexico', alt: 'Picture taken in Merida, Mexico' },
-  { img: image14, title: 'Monaco', alt: 'Picture taken in Monaco' },
+  { img: akihabara1, title: 'Akihabara, Tokyo (Japan)', alt: 'Street scene in Akihabara, Tokyo' },
+  { img: akihabara2, title: 'Akihabara, Tokyo (Japan)', alt: 'Akihabara at night, Tokyo' },
+  { img: akihabara3, title: 'Akihabara, Tokyo (Japan)', alt: 'Shops and signs in Akihabara, Tokyo' },
+  { img: ginza1, title: 'Ginza, Tokyo (Japan)', alt: 'Ginza shopping district, Tokyo' },
+  { img: ginza2, title: 'Ginza, Tokyo (Japan)', alt: 'Ginza streets and storefronts, Tokyo' },
+  { img: groningen1, title: 'Groningen, Netherlands', alt: 'Photo taken in Groningen, Netherlands' },
+  { img: ikebukuro1, title: 'Ikebukuro, Tokyo (Japan)', alt: 'Ikebukuro area, Tokyo' },
+  { img: inari1, title: 'Fushimi Inari, Kyoto (Japan)', alt: 'Torii gates at Fushimi Inari Taisha, Kyoto' },
+  { img: metbuilding1, title: 'Tokyo Metropolitan Government Building (Japan)', alt: 'Tokyo Metropolitan Government Building' },
+  { img: metbuilding2, title: 'Tokyo Metropolitan Government Building (Japan)', alt: 'Tokyo skyline from the Met Building' },
+  { img: metbuilding3, title: 'Tokyo Metropolitan Government Building (Japan)', alt: 'Metropolitan Building observation area, Tokyo' },
+  { img: osakacastle1, title: 'Osaka Castle (Japan)', alt: 'Osaka Castle grounds' },
+  { img: osakacastle2, title: 'Osaka Castle (Japan)', alt: 'Osaka Castle tower' },
+  { img: randomcat1, title: 'Random Cat', alt: 'Random cat photo' },
+  { img: randomcat2, title: 'Random Cat', alt: 'Random cat photo' },
+  { img: skytree1, title: 'Tokyo Skytree (Japan)', alt: 'Tokyo Skytree' },
+  { img: skytree2, title: 'Tokyo Skytree (Japan)', alt: 'Tokyo Skytree at dusk' },
+  { img: skytree3, title: 'Tokyo Skytree (Japan)', alt: 'Tokyo Skytree from distance' },
+  { img: skytree4, title: 'Tokyo Skytree (Japan)', alt: 'Tokyo Skytree lights' },
+  { img: toji1, title: 'Toji Temple, Kyoto (Japan)', alt: 'Toji Temple pagoda, Kyoto' },
+  { img: toji2, title: 'Toji Temple, Kyoto (Japan)', alt: 'Toji Temple grounds' },
+  { img: tokyoMisc1, title: 'Tokyo (Japan)', alt: 'Miscellaneous scene in Tokyo' },
+  { img: tokyoMisc2, title: 'Tokyo (Japan)', alt: 'Another scene in Tokyo' },
+  { img: uenoPark, title: 'Ueno Park, Tokyo (Japan)', alt: 'Ueno Park, Tokyo' },
 ];

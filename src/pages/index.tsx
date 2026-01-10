@@ -1,7 +1,6 @@
 import { compareDesc } from 'date-fns';
 import { GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
-
 import { Container } from '../components/Container';
 import { PageTitle } from '../components/PageTitle';
 import { Photos } from '../components/Photos';
@@ -11,9 +10,9 @@ import { NotePreview } from '../components/notes/NotePreview';
 import { About, Name, SocialMedia } from '../data/lifeApi';
 import { Note, notesApi } from '../lib/notesApi';
 
-const seoTitle = 'Bartosz Jarocki';
+const seoTitle = 'Danel Rahmani';
 const seoDescription =
-  'A passionate software engineer with an eye for details based in Wrocław, Poland.';
+  'A Student at the University of Groningen, studying International Business';
 
 type Props = {
   latestNotes: Note[];
