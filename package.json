@@ -1,3 +1,8 @@
+"scripts": {
+  "build": "npx @cloudflare/next-on-pages",
+  "deploy": "yarn build && npx wrangler deploy .vercel/output/functions"
+}
+
 {
   "name": "blog-starter-typescript",
   "version": "1.0.0",
