@@ -42,6 +42,8 @@ export default function Note({
         datePublished={createdAt}
         authorName="Danel Rahmani"
         description={description}
+        publisherName="Danel Rahmani"
+        publisherLogo="https://danelrahmani.com/asssets/danel.jpg"
       />
       <NoteLayout
         meta={{ title, description, date: createdAt }}

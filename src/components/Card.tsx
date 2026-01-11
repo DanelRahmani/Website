@@ -42,7 +42,7 @@ const CardDescription = ({ children }: React.PropsWithChildren<{}>) => {
   return <p className="relative z-10 mt-2 text-sm">{children}</p>;
 };
 
-const CardCta = ({ children }: React.PropsWithChildren) => {
+const CardCta = ({ children }: React.PropsWithChildren<{}>) => {
   return (
     <div
       aria-hidden="true"

@@ -19,11 +19,11 @@ const Title = ({ as: TitleComponent = 'h1', action, children }: TitleProps) => {
   );
 };
 
-const Content = ({ children }: PropsWithChildren) => {
+const Content = ({ children }: React.PropsWithChildren<{}>) => {
   return <div className="mt-4 text-base text-wrap">{children}</div>;
 };
 
-const SectionRoot = ({ children }: PropsWithChildren) => {
+const SectionRoot = ({ children }: React.PropsWithChildren<{}>) => {
   return <section className="text-wrap">{children}</section>;
 };
 
