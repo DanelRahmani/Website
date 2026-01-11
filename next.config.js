@@ -1,11 +1,12 @@
 const config = {
-  swcMinify: true,
   reactStrictMode: true,
   experimental: {
     scrollRestoration: true,
   },
   transpilePackages: ["geist"],
+  output: 'export', // <-- for static export
   images: {
+    unoptimized: true, // <-- required for static export
     remotePatterns: [
       {
         protocol: 'https',

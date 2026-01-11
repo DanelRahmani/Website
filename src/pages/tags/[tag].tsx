@@ -19,7 +19,7 @@ export default function Tag({ tag, relatedNotes }: Props) {
     <>
       <NextSeo
         title={seoTitle}
-        description={`${seoDescription}#${tag}}`}
+        description={`${seoDescription}#${tag}`}
         canonical={`${process.env.NEXT_PUBLIC_URL}/tags/${tag}`}
         openGraph={{
           images: [
@@ -42,51 +42,39 @@ export default function Tag({ tag, relatedNotes }: Props) {
   );
 }
 
-export const getStaticProps: GetStaticProps<Props, { tag: string }> = async (context) => {
+// Fetch notes by tag at build time
+export const getStaticProps: GetStaticProps<Props, { tag: string }> = async ({ params }) => {
   try {
-    const tag = context.params?.tag;
-    if (!tag) {
-      return {
-        notFound: true,
-      };
-    }
-
+    const tag = params?.tag!;
     const relatedNotes = await notesApi.getNotesByTag(tag);
 
     return {
       props: {
-        relatedNotes,
         tag,
+        relatedNotes,
       },
-      revalidate: 10,
     };
   } catch (err: any) {
-    console.error('Error in getStaticProps for /tags/[tag]:', err);
-    if (err?.message?.includes('Notion not configured')) {
-      return { notFound: true };
-    }
-    throw new Error(`Failed to collect page data for /tags/[tag]: ${err?.message ?? String(err)}`);
+    console.error('Failed to fetch notes by tag:', err);
+    return { notFound: true }; // build continues even if Notion fails
   }
 };
 
+// Pre-generate paths for all tags
 export const getStaticPaths: GetStaticPaths = async () => {
   try {
-    const tags = await notesApi.getAllTags();
+    const tags = await notesApi.getAllTags(); // fetch all tags from Notion
+    const paths = tags.map((tag) => ({ params: { tag } }));
 
     return {
-      paths: tags.map((tag) => ({
-        params: { tag },
-      })),
-      fallback: 'blocking',
+      paths,
+      fallback: false, // required for static export
     };
   } catch (err: any) {
-    console.error('Error in getStaticPaths for /tags:', err);
-    if (err?.message?.includes('Notion not configured')) {
-      return {
-        paths: [],
-        fallback: false,
-      };
-    }
-    throw new Error(`Failed to get static paths for /tags: ${err?.message ?? String(err)}`);
+    console.error('Failed to fetch static paths for tags:', err);
+    return {
+      paths: [], // build still succeeds
+      fallback: false,
+    };
   }
 };

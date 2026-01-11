@@ -2,8 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { ArticleJsonLd, NextSeo } from 'next-seo';
 import Prism from 'prismjs';
 import { useEffect } from 'react';
-import Share, { openShare } from '../../components/Share';
-import { XIcon } from '../../components/icons/XIcon';
+import Share from '../../components/Share';
 import { NoteLayout } from '../../components/notes/NoteLayout';
 import { NotionBlockRenderer } from '../../components/notion/NotionBlockRenderer';
 import { Note as NoteType, notesApi } from '../../lib/notesApi';
@@ -16,8 +15,7 @@ type Props = {
 export default function Note({
   note: { title, description, createdAt, slug },
   noteContent,
-  previousPathname,
-}: Props & { previousPathname: string }) {
+}: Props) {
   const url = `${process.env.NEXT_PUBLIC_URL}/notes/${slug}`;
   const openGraphImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/og?title=${title}&description=${description}`;
 
@@ -31,9 +29,7 @@ export default function Note({
         title={title}
         description={description}
         canonical={url}
-        openGraph={{
-          images: [{ url: openGraphImageUrl }],
-        }}
+        openGraph={{ images: [{ url: openGraphImageUrl }] }}
       />
       <ArticleJsonLd
         url={url}
@@ -45,15 +41,11 @@ export default function Note({
         publisherName="Danel Rahmani"
         publisherLogo="https://danelrahmani.com/asssets/danel.jpg"
       />
-      <NoteLayout
-        meta={{ title, description, date: createdAt }}
-        previousPathname={previousPathname}
-      >
+      <NoteLayout meta={{ title, description, date: createdAt }}>
         <div className="pb-32">
           {noteContent.map((block) => (
             <NotionBlockRenderer key={block.id} block={block} />
           ))}
-
           <hr />
           <Share title={title} url={url} image={openGraphImageUrl} className="mt-8" />
         </div>
@@ -62,54 +54,41 @@ export default function Note({
   );
 }
 
-export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (context) => {
+// Fetch note content at build time
+export const getStaticProps: GetStaticProps<Props, { slug: string }> = async ({ params }) => {
   try {
-    const slug = context.params?.slug;
-    const allNotes = await notesApi.getNotes();
-    const note = allNotes.find((note) => note.slug === slug);
+    const slug = params?.slug!;
+    const allNotes = await notesApi.getNotes(); // fetch all notes from Notion
+    const note = allNotes.find((n) => n.slug === slug);
 
     if (!note) {
-      return {
-        notFound: true,
-      };
+      return { notFound: true };
     }
 
     const noteContent = await notesApi.getNote(note.id);
 
-    return {
-      props: {
-        note,
-        noteContent,
-      },
-      revalidate: 10,
-    };
+    return { props: { note, noteContent } };
   } catch (err: any) {
-    console.error('Error in getStaticProps for /notes/[slug]:', err);
-    // If Notion is not configured, return notFound so build can continue without notes
-    if (err?.message?.includes('Notion not configured')) {
-      return { notFound: true };
-    }
-    throw new Error(`Failed to collect page data for /notes/[slug]: ${err?.message ?? String(err)}`);
+    console.error('Failed to fetch note for static export:', err);
+    return { notFound: true };
   }
 };
 
+// Pre-generate paths for all notes
 export const getStaticPaths: GetStaticPaths = async () => {
   try {
-    const posts = await notesApi.getNotes();
+    const allNotes = await notesApi.getNotes(); // fetch all notes from Notion
+    const paths = allNotes.map((note) => ({ params: { slug: note.slug } }));
 
     return {
-      paths: posts.map((post) => ({ params: { slug: post.slug } })),
-      fallback: 'blocking',
+      paths,
+      fallback: false, // required for static export
     };
   } catch (err: any) {
-    console.error('Error in getStaticPaths for /notes:', err);
-    // If Notion is not configured, return no paths so the build can continue
-    if (err?.message?.includes('Notion not configured')) {
-      return {
-        paths: [],
-        fallback: false,
-      };
-    }
-    throw new Error(`Failed to get static paths for /notes: ${err?.message ?? String(err)}`);
+    console.error('Failed to fetch static paths from Notion:', err);
+    return {
+      paths: [], // build still succeeds
+      fallback: false,
+    };
   }
 };

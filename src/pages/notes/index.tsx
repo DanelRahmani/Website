@@ -12,7 +12,7 @@ const seoDescription =
 
 interface Props {
   notes: Note[];
-  tags: Array<string>;
+  tags: string[];
 }
 
 export default function Notes({ notes, tags }: Props) {
@@ -60,19 +60,16 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
         notes,
         tags: Array.from(new Set(notes.map((post) => post.tags).flat())),
       },
-      revalidate: 10,
     };
   } catch (err: any) {
     console.error('Error in getStaticProps for /notes:', err);
-    if (err?.message?.includes('Notion not configured')) {
-      return {
-        props: {
-          notes: [],
-          tags: [],
-        },
-        revalidate: 10,
-      };
-    }
-    throw new Error(`Failed to get notes for /notes: ${err?.message ?? String(err)}`);
+
+    // If Notion not configured, return empty props to allow static export
+    return {
+      props: {
+        notes: [],
+        tags: [],
+      },
+    };
   }
 };

@@ -64,7 +64,7 @@ export default function Home({ latestNotes }: Props) {
       </Container>
     </>
   );
-}
+};
 
 const NEWEST_POSTS_TO_DISPLAY = 5;
 
@@ -73,17 +73,14 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     const latestNotes = await notesApi.getNotes('desc', NEWEST_POSTS_TO_DISPLAY);
 
     return {
-      props: { latestNotes },
-      revalidate: 10,
+      props: { latestNotes }, // <-- no revalidate for static export
     };
   } catch (err: any) {
     console.error('Error in getStaticProps for /:', err);
-    if (err?.message?.includes('Notion not configured')) {
-      return {
-        props: { latestNotes: [] },
-        revalidate: 10,
-      };
-    }
-    throw new Error(`Failed to get latest notes for /: ${err?.message ?? String(err)}`);
+
+    // Fail gracefully for static export
+    return {
+      props: { latestNotes: [] }, // empty array if Notion fails
+    };
   }
 };

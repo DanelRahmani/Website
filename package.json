@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "open-next build",
-    "postbuild": "next-sitemap",
+    "build": "next build && next export",
     "start": "next start",
+    "postbuild": "next-sitemap",
     "lint": "next lint",
     "format": "prettier --write ./src/**/*.{js,jsx,ts,tsx}",
     "typecheck": "tsc",
