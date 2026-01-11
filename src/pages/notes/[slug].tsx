@@ -17,7 +17,7 @@ export default function Note({
   noteContent,
 }: Props) {
   const url = `${process.env.NEXT_PUBLIC_URL}/notes/${slug}`;
-  const openGraphImageUrl = `${process.env.NEXT_PUBLIC_URL}/api/og?title=${title}&description=${description}`;
+  const staticOgImage = `${process.env.NEXT_PUBLIC_URL}/assets/og-placeholder.png`; // static image
 
   useEffect(() => {
     Prism.highlightAll();
@@ -29,17 +29,17 @@ export default function Note({
         title={title}
         description={description}
         canonical={url}
-        openGraph={{ images: [{ url: openGraphImageUrl }] }}
+        openGraph={{ images: [{ url: staticOgImage }] }}
       />
       <ArticleJsonLd
         url={url}
-        images={[openGraphImageUrl]}
+        images={[staticOgImage]}
         title={title}
         datePublished={createdAt}
         authorName="Danel Rahmani"
         description={description}
         publisherName="Danel Rahmani"
-        publisherLogo="https://danelrahmani.com/asssets/danel.jpg"
+        publisherLogo="https://danelrahmani.com/assets/danel.jpg"
       />
       <NoteLayout meta={{ title, description, date: createdAt }}>
         <div className="pb-32">
@@ -47,7 +47,7 @@ export default function Note({
             <NotionBlockRenderer key={block.id} block={block} />
           ))}
           <hr />
-          <Share title={title} url={url} image={openGraphImageUrl} className="mt-8" />
+          <Share title={title} url={url} image={staticOgImage} className="mt-8" />
         </div>
       </NoteLayout>
     </>
