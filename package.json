@@ -1,17 +1,16 @@
 {
   "name": "blog-starter-typescript",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
-    "build": "open-next build",
-    "deploy": "yarn build && wrangler deploy"
-  },
     "dev": "next",
-    "build": "next build",
+    "build": "open-next build",
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write ./src/**/*.{js,jsx,ts,tsx}",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "deploy": "yarn build && wrangler deploy"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.2",
@@ -62,6 +61,4 @@
   },
   "license": "MIT",
   "packageManager": "yarn@4.5.0"
-  }
-
-
+}
